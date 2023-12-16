@@ -68,6 +68,12 @@ public class CreateDatabaseTable {
 
             String insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('1. Jakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
             statement.executeUpdate(insert);
+            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('ASSJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
+            statement.executeUpdate(insert);
+            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('ERTRJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
+            statement.executeUpdate(insert);
+            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('POLJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
+            statement.executeUpdate(insert);
             System.out.println("dodano: "+insert);
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
