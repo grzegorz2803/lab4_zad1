@@ -2,10 +2,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ResponseCache;
 import java.net.Socket;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClientHandler  implements Runnable{
 private final Socket clientSocket;
@@ -14,14 +14,16 @@ private Statement statement;
 
     static final String USER = "root";
     static final  String PASS = "";
+    ArrayList<Question> questions;
     ArrayList<String> answers;
     ArrayList<String> correctAnswers;
     String name;
-public ClientHandler(Socket clientSocket){
+public ClientHandler(Socket clientSocket, ArrayList<Question> questions){
     this.clientSocket = clientSocket;
     statement=null;
     answers = new ArrayList<>();
     correctAnswers = new ArrayList<>();
+    this.questions = questions;
 }
     @Override
     public void run() {
@@ -33,43 +35,30 @@ public ClientHandler(Socket clientSocket){
         String useDatabaseSQL = "USE kolokwium";
         statement = connection.createStatement();
         statement.executeUpdate(useDatabaseSQL);
-        String query = "Select * from question";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        ResultSet resultSet = preparedStatement.executeQuery();
+
         String name = "Podaj imię i nazwisko";
         out.println(name);
         name  = in.readLine();
         System.out.println(name);
-        while (resultSet.next()){
-            int id = resultSet.getInt("id");
-            String question = resultSet.getString("question");
-            String answerA = resultSet.getString("answerA");
-            String answerB = resultSet.getString("answerB");
-            String answerC = resultSet.getString("answerC");
-            String answerD = resultSet.getString("answerD");
-            String correctAnswer = resultSet.getString("correctAnswer");
-            correctAnswers.add(correctAnswer);
-            String serverQuestion = question + "\t" +
-                    answerA + "\t" +
-                    answerB + "\t" +
-                    answerC + "\t" +
-                    answerD;
-            out.println(serverQuestion);
-           String clientAnswer = in.readLine();
+        AtomicInteger result= new AtomicInteger();
+        questions.forEach(question -> {
+           out.println(question.toString());
+            String clientAnswer = null;
+            try {
+                clientAnswer = in.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if(question.isCorrect(clientAnswer))
+                result.getAndIncrement();
             answers.add(clientAnswer);
+        });
 
-        }
-        int result=0;
-        for (int i = 0; i < answers.size(); i++) {
-            if (answers.get(i).equals(correctAnswers.get(i)))
-                result++;
-
-        }
         out.println("Twój wynik: "+result+"/10");
         String insert = "INSERT INTO result (user, result) values (?,?)";
-        preparedStatement = connection.prepareStatement(insert);
+        PreparedStatement preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, name);
-        preparedStatement.setInt(2, result);
+        preparedStatement.setInt(2, result.get());
         preparedStatement.executeUpdate();
         connection.close();
         in.close();
