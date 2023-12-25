@@ -37,7 +37,7 @@ public ClientHandler(Socket clientSocket){
             String answerB = resultSet.getString("answerB");
             String answerC = resultSet.getString("answerC");
             String answerD = resultSet.getString("answerD");
-            out.println(id+"."+question);
+            out.println(question);
             out.println(answerA);
             out.println(answerB);
             out.println(answerC);

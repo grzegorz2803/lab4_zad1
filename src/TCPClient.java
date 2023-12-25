@@ -16,7 +16,7 @@ public class TCPClient {
             // Odczytywanie danych od serwera
             String receivedData;
             while ((receivedData = in.readLine()) != null) {
-                System.out.println("Otrzymano: " + receivedData);
+                System.out.println( receivedData);
             }
 
             // Zamknięcie strumienia i gniazda

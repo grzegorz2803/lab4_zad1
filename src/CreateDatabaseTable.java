@@ -65,16 +65,37 @@ public class CreateDatabaseTable {
                     "foreign key (userID) references user(id))";
             statement.executeUpdate(createTableSQL);
             System.out.println("Stworzono tabelę answer");
-
-            String insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('1. Jakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
-            statement.executeUpdate(insert);
-            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('ASSJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
-            statement.executeUpdate(insert);
-            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('ERTRJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
-            statement.executeUpdate(insert);
-            insert = "Insert into question (question, answerA, answerB, answerC, answerD, correctAnswer) values ('POLJakie jest stolica Francji?**', 'a) Berlin', 'b) Paryż', 'c) Londyn', 'd) Madryt', 'b')" ;
+            String insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('1. Jakie jest stolica Francji?', 'a. Berlin', 'b. Paryż', 'c. Londyn', 'd. Madryt', 'b');";
             statement.executeUpdate(insert);
             System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('2. Który pierwiastek chemiczny reprezentowany jest symbolem \"O\"?', 'a. Tlen', 'b. Wodór', 'c. Azot', 'd. Sód', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('3. Kto napisał \"Romeo i Julia\"?', 'a. Charles Dickens', 'b. William Shakespeare', 'c. Jane Austen', 'd. Fiodor Dostojewski', 'b');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('4. Jaki kolor ma tradycyjnie skrzynka na listy?', 'a. Czerwony', 'b. Zielony', 'c. Niebieski', 'd. Żółty', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('5. Ile kontynentów jest na świecie?', 'a. 5', 'b. 6', 'c. 7', 'd. 8', 'b');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('6. Która planeta jest znana jako \"Czerwona Planeta\"?', 'a. Wenus', 'b. Mars', 'c. Jowisz', 'd. Saturn', 'b');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('7. Które zwierzę jest symbolem mądrości w wielu kulturach?', 'a. Sowa', 'b. Tygrys', 'c. Żyrafa', 'd. Wąż', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('8. Jak nazywa się proces, podczas którego roślina przetwarza światło na energię?', 'a. Fotosynteza', 'b. Respiracja', 'c. Fermentacja', 'd. Dekompozycja', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('9. Które państwo jest największe pod względem powierzchni?', 'a. Rosja', 'b. Stany Zjednoczone', 'c. Kanada', 'd. Australia', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+            insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('10. Co oznacza skrót HTML w kontekście informatyki?', 'a. HyperText Markup Language', 'b. HighTech Modern Language', 'c. Hotmail', 'd. HyperTransfer Machine Language', 'a');";
+            statement.executeUpdate(insert);
+            System.out.println("dodano: "+insert);
+
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }finally {
