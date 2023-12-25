@@ -42,27 +42,19 @@ public class CreateDatabaseTable {
             statement.executeUpdate(createTableSQL);
             System.out.println("Stworzono tabelę question");
 
-            createTableSQL = "CREATE TABLE IF NOT EXISTS user " +
-                    "(id int not null auto_increment primary key, " +
-                    "name varchar(255) not null," +
-                    "lastName varchar(255) not null)";
-            statement.executeUpdate(createTableSQL);
-            System.out.println("Stworzono tabelę user");
 
             createTableSQL = "CREATE TABLE IF NOT EXISTS result " +
                     "(id int not null auto_increment primary key, " +
-                    "userID int  not null," +
-                    "result int not null," +
-                    "Foreign key (userID) References user(id))";
+                    "user varchar(255) not null," +
+                    "result int not null)";
             statement.executeUpdate(createTableSQL);
             System.out.println("Stworzono tabelę result");
 
             createTableSQL = "CREATE TABLE IF NOT EXISTS answer " +
                     "(id int not null auto_increment primary key, " +
-                    "userID int  not null," +
+                    "user varchar(255) not null," +
                     "question varchar(255) not null," +
-                    "answer varchar(1) not null," +
-                    "foreign key (userID) references user(id))";
+                    "answer varchar(1) not null)";
             statement.executeUpdate(createTableSQL);
             System.out.println("Stworzono tabelę answer");
             String insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('1. Jakie jest stolica Francji?', 'a. Berlin', 'b. Paryż', 'c. Londyn', 'd. Madryt', 'b');";

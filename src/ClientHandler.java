@@ -66,7 +66,11 @@ public ClientHandler(Socket clientSocket){
 
         }
         out.println("Twój wynik: "+result+"/10");
-
+        String insert = "INSERT INTO result (user, result) values (?,?)";
+        preparedStatement = connection.prepareStatement(insert);
+        preparedStatement.setString(1, name);
+        preparedStatement.setInt(2, result);
+        preparedStatement.executeUpdate();
         connection.close();
         in.close();
         out.close();
