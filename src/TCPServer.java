@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
@@ -32,13 +29,14 @@ static final int MAX_CLIENTS = 250;
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
+                int id = resultSet.getInt("id");
                 String question = resultSet.getString("question");
                 String answerA = resultSet.getString("answerA");
                 String answerB = resultSet.getString("answerB");
                 String answerC = resultSet.getString("answerC");
                 String answerD = resultSet.getString("answerD");
                 String correctAnswer = resultSet.getString("correctAnswer");
-              Question q = new Question(question,answerA,answerB,answerC,answerD,correctAnswer);
+              Question q = new Question(id,question,answerA,answerB,answerC,answerD,correctAnswer);
               questions.add(q);
             }
 

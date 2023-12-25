@@ -1,12 +1,14 @@
 public class Question {
-    private String question;
-    private String answerA;
-    private String answerB;
-    private String answerC;
-    private String answerD;
-    private String correctAnswer;
+    private  final int id;
+    private final String  question;
+    private final String answerA;
+    private final String answerB;
+    private final String answerC;
+    private final String answerD;
+    private final String correctAnswer;
 
-    public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer) {
+    public Question(int id,String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer) {
+        this.id = id;
         this.question = question;
         this.answerA = answerA;
         this.answerB = answerB;
@@ -21,5 +23,10 @@ public class Question {
     }
     public boolean isCorrect(String answer){
         return answer.equals(correctAnswer);
+    }
+
+
+    public int getId() {
+        return id;
     }
 }

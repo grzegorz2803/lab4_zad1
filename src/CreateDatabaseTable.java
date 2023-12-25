@@ -53,8 +53,9 @@ public class CreateDatabaseTable {
             createTableSQL = "CREATE TABLE IF NOT EXISTS answer " +
                     "(id int not null auto_increment primary key, " +
                     "user varchar(255) not null," +
-                    "question varchar(255) not null," +
-                    "answer varchar(1) not null)";
+                    "questionID int  not null," +
+                    "answer varchar(1) not null,"+
+                    "foreign key (questionID) references question(id))";
             statement.executeUpdate(createTableSQL);
             System.out.println("Stworzono tabelę answer");
             String insert = "INSERT INTO question (question, answerA, answerB, answerC, answerD, correctAnswer) VALUES ('1. Jakie jest stolica Francji?', 'a. Berlin', 'b. Paryż', 'c. Londyn', 'd. Madryt', 'b');";

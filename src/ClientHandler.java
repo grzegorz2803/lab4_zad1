@@ -15,13 +15,11 @@ private Statement statement;
     static final String USER = "root";
     static final  String PASS = "";
     ArrayList<Question> questions;
-    ArrayList<String> answers;
     ArrayList<String> correctAnswers;
     String name;
 public ClientHandler(Socket clientSocket, ArrayList<Question> questions){
     this.clientSocket = clientSocket;
     statement=null;
-    answers = new ArrayList<>();
     correctAnswers = new ArrayList<>();
     this.questions = questions;
 }
@@ -39,19 +37,25 @@ public ClientHandler(Socket clientSocket, ArrayList<Question> questions){
         String name = "Podaj imię i nazwisko";
         out.println(name);
         name  = in.readLine();
-        System.out.println(name);
         AtomicInteger result= new AtomicInteger();
+        String finalName = name;
         questions.forEach(question -> {
            out.println(question.toString());
             String clientAnswer = null;
             try {
                 clientAnswer = in.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                if(question.isCorrect(clientAnswer))
+                    result.getAndIncrement();
+                String insertAnswer = "Insert into answer (user, questionID, answer) values (?,?,?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(insertAnswer);
+                preparedStatement.setString(1, finalName);
+                preparedStatement.setInt(2, question.getId());
+                preparedStatement.setString(3, clientAnswer);
+                preparedStatement.executeUpdate();
+            } catch (IOException | SQLException e) {
+               e.printStackTrace();
             }
-            if(question.isCorrect(clientAnswer))
-                result.getAndIncrement();
-            answers.add(clientAnswer);
+
         });
 
         out.println("Twój wynik: "+result+"/10");
